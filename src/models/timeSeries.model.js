@@ -29,7 +29,8 @@ else{
   result(null, res);
 }
 });
-};
+}; 
+
 TimeSeries.findAll = function (result) {
 dbConn.query("Select * from timeSeries", function (err, res) {
 if(err) {
