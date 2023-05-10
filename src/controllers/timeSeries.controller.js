@@ -1,5 +1,7 @@
 'use strict';
 const TimeSeries = require('../models/timeSeries.model');
+
+// fetch data yearwise
 exports.findAll = function(req, res) {
 TimeSeries.findAll(function(err, timeSeries) {
   console.log('controller')
@@ -9,6 +11,17 @@ TimeSeries.findAll(function(err, timeSeries) {
   res.send(timeSeries);
 });
 };
+
+// Fetch data by year
+exports.findAllYear = function(req, res) {
+  TimeSeries.findAllYear(function(err, timeSeries) {
+    console.log('controller (Year)')
+    if (err)
+    res.send(err);
+    console.log('res', timeSeries);
+    res.send(timeSeries);
+  });
+  };
 
 
 exports.create = function(req, res) {

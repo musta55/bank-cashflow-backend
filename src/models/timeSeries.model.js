@@ -31,6 +31,7 @@ else{
 });
 }; 
 
+// Fetch All Data by date
 TimeSeries.findAll = function (result) {
 dbConn.query("Select * from timeSeries", function (err, res) {
 if(err) {
@@ -42,7 +43,27 @@ else{
   result(null, res);
 }
 });
+
 };
+
+// Fetch all data year wise
+
+TimeSeries.findAllYear = function (result) {
+  dbConn.query("SELECT  SUM(inflow), SUM(outflow), YEAR(date) AS year FROM banksql.timeSeries GROUP BY YEAR(date);", function (err, res) {
+  if(err) {
+    console.log("error: ", err);
+    result(null, err);
+  }
+  else{
+    console.log('timeSeries year wise : ', res);
+    result(null, res);
+  }
+  });
+  
+  };
+
+
+
 TimeSeries.update = function(flowID, timeSeries, result){
 dbConn.query("UPDATE timeSeries SET inflow=?,outflow=?,date=? WHERE flowID = ?", [timeSeries.inflow,timeSeries.outflow,timeSeries.date,flowID], function (err, res) {
 if(err) {
@@ -53,6 +74,8 @@ if(err) {
 }
 });
 };
+
+
 TimeSeries.delete = function(flowID, result){
 dbConn.query("DELETE FROM timeSeries WHERE flowID = ?", [flowID], function (err, res) {
 if(err) {
