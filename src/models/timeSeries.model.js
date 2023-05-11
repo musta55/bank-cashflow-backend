@@ -49,7 +49,7 @@ else{
 // Fetch all data year wise
 
 TimeSeries.findAllYear = function (result) {
-  dbConn.query("SELECT  SUM(inflow), SUM(outflow), YEAR(date) AS year FROM banksql.timeSeries GROUP BY YEAR(date);", function (err, res) {
+  dbConn.query("SELECT  SUM(inflow) AS inflow, SUM(outflow) AS outflow, YEAR(date) AS year FROM banksql.timeSeries GROUP BY YEAR(date);", function (err, res) {
   if(err) {
     console.log("error: ", err);
     result(null, err);
