@@ -2,9 +2,9 @@ const express = require('express')
 const router = express.Router()
 const timeSeriesController =   require('../controllers/timeSeries.controller');
 // Retrieve all timeSeriess
-router.get('/', timeSeriesController.findAll);
+router.get('/:id', timeSeriesController.findAll);
 //Yearwise
-router.get('/year', timeSeriesController.findAllYear);
+router.get('/year/:id', timeSeriesController.findAllYear);
 // Create a new timeSeries
 router.post('/', timeSeriesController.create);
 // Retrieve a single timeSeries with id

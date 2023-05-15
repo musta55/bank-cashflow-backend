@@ -3,7 +3,7 @@ const TimeSeries = require('../models/timeSeries.model');
 
 // fetch data yearwise
 exports.findAll = function(req, res) {
-TimeSeries.findAll(function(err, timeSeries) {
+TimeSeries.findAll(req.params.id,function(err, timeSeries) {
   console.log('controller')
   if (err)
   res.send(err);
@@ -14,7 +14,7 @@ TimeSeries.findAll(function(err, timeSeries) {
 
 // Fetch data by year
 exports.findAllYear = function(req, res) {
-  TimeSeries.findAllYear(function(err, timeSeries) {
+  TimeSeries.findAllYear(req.params.id,function(err, timeSeries) {
     console.log('controller (Year)')
     if (err)
     res.send(err);

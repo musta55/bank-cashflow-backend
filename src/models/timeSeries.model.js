@@ -32,14 +32,15 @@ else{
 }; 
 
 // Fetch All Data by date
-TimeSeries.findAll = function (result) {
-dbConn.query("Select * from timeSeries", function (err, res) {
+TimeSeries.findAll = function (branch,result) {
+dbConn.query(`Select * from timeSeries where branch = ?`,branch, function (err, res) {
+
 if(err) {
   console.log("error: ", err);
   result(null, err);
 }
 else{
-  console.log('timeSeries : ', res);
+ // console.log('timeSeries : ', res);
   result(null, res);
 }
 });
@@ -48,8 +49,8 @@ else{
 
 // Fetch all data year wise
 
-TimeSeries.findAllYear = function (result) {
-  dbConn.query("SELECT  SUM(inflow) AS inflow, SUM(outflow) AS outflow, YEAR(date) AS year FROM banksql.timeSeries GROUP BY YEAR(date);", function (err, res) {
+TimeSeries.findAllYear = function (branch,result) {
+  dbConn.query(`SELECT  SUM(INFLOW) AS inflow, SUM(OUTFLOW) AS outflow, YEAR(Date) AS year FROM banksql.timeSeries  where branch = ? GROUP BY YEAR(Date)`,branch, function (err, res) {
   if(err) {
     console.log("error: ", err);
     result(null, err);
