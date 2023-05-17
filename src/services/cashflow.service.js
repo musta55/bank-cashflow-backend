@@ -13,7 +13,7 @@ async function getTimeSeries(branch) {
     console.log('ele ' + element)
     allCashflow.rows.push( new cashflowDTO(element));
   });
-  return allCashflow;
+  return data;
 
 }
 
